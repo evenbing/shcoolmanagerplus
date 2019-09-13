@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cyz.dao.TeacherMapper">
+  <resultMap id="BaseResultMap" type="com.cyz.bean.Teacher">
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="tname" jdbcType="VARCHAR" property="tname" />
+    <result column="tpassword" jdbcType="VARCHAR" property="tpassword" />
+  </resultMap>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select tid, tname, tpassword
+    from teacher
+  </select>
+  <select id="findSelf" resultType="com.cyz.bean.Teacher">
+    select * from teacher where tid =#{tid}
+  </select>
+  <update id="updatePassword" >
+    update teacher set spassword = #{spassword} where sid=#{sid}
+  </update>
+  <select id="findAllCourse" resultType="com.cyz.bean.Course">
+    select * from course
+  </select>
+  <insert id="addCourse">
+    insert into course (cname,cmsg) values (#{cname},#{cmsg})
+  </insert>
+  <select id="findAllStudent" resultType="com.cyz.bean.Student">
+    select * from student
+  </select>
+  <select id="findSelectedCourseBySid" resultType="com.cyz.bean.Stu_course">
+    select * from stu_course where sid=#{sid}
+  </select>
+  <update id="updateGrade">
+    update stu_course set cgrade = #{cgrade} where sid =#{sid} and cid =#{cid}
+  </update>
+</mapper>
